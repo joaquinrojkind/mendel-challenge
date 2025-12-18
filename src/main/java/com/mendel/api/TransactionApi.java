@@ -18,15 +18,15 @@ public class TransactionApi {
     private TransactionService transactionService;
 
     @PutMapping("/{transaction_id}")
-    public ResponseEntity<TransactionDto> editTransaction(@RequestBody TransactionDto transactionDto) {
+    public ResponseEntity<TransactionDto> updateTransaction(@PathVariable("transaction_id") long transactionId, @RequestBody TransactionDto transactionDto) {
+        transactionDto.setTransaction_id(transactionId);
         Transaction transaction = transactionService.updateTransaction(toTransaction(transactionDto));
         return ResponseEntity.ok().body(toTransactionDto(transaction));
     }
 
     @GetMapping("/types/{type}")
-    public List<Long> getTypes(@PathVariable("type") String type) {
-        List<Long> ids = transactionService.getTransactionIdsByType(type);
-        return ids;
+    public List<Long> getByType(@PathVariable("type") String type) {
+        return transactionService.getTransactionIdsByType(type);
     }
 
     @GetMapping("/sum/{transaction_id}")

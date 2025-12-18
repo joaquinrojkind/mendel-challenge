@@ -25,13 +25,16 @@ public class TransactionServiceImpl implements TransactionService {
     public List<Long> getTransactionIdsByType(String type) {
         List<TransactionEntity> matches = repository.getTransactionsByType(type);
         return matches.stream()
-                .map(transaction -> transaction.getTransaction_id())
+                .map(transaction -> transaction.getTransactionId())
                 .collect(Collectors.toList());
     }
 
     @Override
     public double sumTransactions(long transaction_id) {
        TransactionEntity parentTransaction = repository.findTransactionById(transaction_id);
+       if (parentTransaction == null) {
+           return 0.00;
+       }
        List<TransactionEntity> childTransactionsByParentId = repository.findChildTransactionsByParentId(transaction_id);
 
         List<Double> values = childTransactionsByParentId.stream()
@@ -46,7 +49,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     private TransactionEntity toTransactionEntity(Transaction transaction) {
         return TransactionEntity.builder()
-                .transaction_id(transaction.getTransaction_id())
+                .transactionId(transaction.getTransaction_id())
                 .amount(transaction.getAmount())
                 .type(transaction.getType())
                 .parent_id(transaction.getParent_id())
@@ -55,7 +58,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     private Transaction toTransaction(TransactionEntity transaction) {
         return Transaction.builder()
-                .transaction_id(transaction.getTransaction_id())
+                .transaction_id(transaction.getTransactionId())
                 .amount(transaction.getAmount())
                 .type(transaction.getType())
                 .parent_id(transaction.getParent_id())
