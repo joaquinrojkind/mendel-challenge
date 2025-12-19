@@ -40,22 +40,22 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 	}
 
 	@Override
-	public List<TransactionEntity> findChildTransactionsByParentId(long transaction_id) {
+	public List<TransactionEntity> findChildTransactionsByParentId(Long transactionId) {
 
 		printDatabaseState("findChildTransactionsByParentId");
 
 		List<TransactionEntity> transactionEntities = DATABASE.values().stream()
-				.filter(transactionEntity -> transactionEntity.getParent_id() == transaction_id)
+				.filter(transactionEntity -> transactionEntity.getParentId() != null && transactionEntity.getParentId() == transactionId)
 				.collect(Collectors.toList());
 		return transactionEntities;
 	}
 
 	@Override
-	public TransactionEntity findTransactionById(long transaction_id) {
+	public TransactionEntity findTransactionById(Long transactionId) {
 
 		printDatabaseState("findTransactionById");
 
-		return DATABASE.get(transaction_id);
+		return DATABASE.get(transactionId);
 	}
 
 	/*

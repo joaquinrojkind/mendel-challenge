@@ -10,5 +10,5 @@ public interface TransactionService {
 
     List<Long> getTransactionIdsByType(String type);
 
-    double sumTransactions(long transaction_id);
+    double sumTransactions(Long transactionId);
 }

@@ -9,8 +9,8 @@ import lombok.ToString;
 @Builder
 public class TransactionEntity {
 
-    private long transactionId;
+    private Long transactionId;
     private Double amount;
     private String type;
-    private long parent_id;
+    private Long parentId;
 }

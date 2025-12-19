@@ -12,14 +12,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/transactions")
+
 public class TransactionApi {
 
     @Autowired
     private TransactionService transactionService;
 
-    @PutMapping("/{transaction_id}")
-    public ResponseEntity<TransactionDto> updateTransaction(@PathVariable("transaction_id") long transactionId, @RequestBody TransactionDto transactionDto) {
-        transactionDto.setTransaction_id(transactionId);
+    @PutMapping("/{transactionId}")
+    public ResponseEntity<TransactionDto> updateTransaction(@PathVariable("transactionId") Long transactionId, @RequestBody TransactionDto transactionDto) {
+        transactionDto.setTransactionId(transactionId);
         Transaction transaction = transactionService.updateTransaction(toTransaction(transactionDto));
         return ResponseEntity.ok().body(toTransactionDto(transaction));
     }
@@ -29,10 +30,10 @@ public class TransactionApi {
         return transactionService.getTransactionIdsByType(type);
     }
 
-    @GetMapping("/sum/{transaction_id}")
-    public ResponseEntity<SumTransactionsResponseDto> sumTransactions(@PathVariable("transaction_id") Long transaction_id) {
+    @GetMapping("/sum/{transactionId}")
+    public ResponseEntity<SumTransactionsResponseDto> sumTransactions(@PathVariable("transactionId") Long transactionId) {
 
-        double sum = transactionService.sumTransactions(transaction_id);
+        double sum = transactionService.sumTransactions(transactionId);
 
         return ResponseEntity.ok(
                 SumTransactionsResponseDto.builder()
@@ -42,19 +43,19 @@ public class TransactionApi {
 
     private Transaction toTransaction(TransactionDto transactionDto) {
         return Transaction.builder()
-                .transaction_id(transactionDto.getTransaction_id())
+                .transactionId(transactionDto.getTransactionId())
                 .amount(transactionDto.getAmount())
                 .type(transactionDto.getType())
-                .parent_id(transactionDto.getParent_id())
+                .parentId(transactionDto.getParentId())
                 .build();
     }
 
     private TransactionDto toTransactionDto(Transaction transaction) {
         return TransactionDto.builder()
-                .transaction_id(transaction.getTransaction_id())
+                .transactionId(transaction.getTransactionId())
                 .amount(transaction.getAmount())
                 .type(transaction.getType())
-                .parent_id(transaction.getParent_id())
+                .parentId(transaction.getParentId())
                 .build();
     }
 }

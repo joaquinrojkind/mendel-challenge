@@ -10,7 +10,7 @@ public interface TransactionRepository {
 
     List<TransactionEntity> getTransactionsByType(String type);
 
-    List<TransactionEntity> findChildTransactionsByParentId(long transaction_id);
+    List<TransactionEntity> findChildTransactionsByParentId(Long transactionId);
 
-    TransactionEntity findTransactionById(long transaction_id);
+    TransactionEntity findTransactionById(Long transactionId);
 }

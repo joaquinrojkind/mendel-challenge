@@ -1,5 +1,6 @@
 package com.mendel.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,10 +8,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TransactionDto {
 
-    private long transaction_id;
+    private Long transactionId;
     private Double amount;
     private String type;
-    private long parent_id;
+    private Long parentId;
 }

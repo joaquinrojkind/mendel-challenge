@@ -9,8 +9,8 @@ import lombok.Setter;
 @Builder
 public class Transaction {
 
-    private long transaction_id;
+    private Long transactionId;
     private Double amount;
     private String type;
-    private long parent_id;
+    private Long parentId;
 }

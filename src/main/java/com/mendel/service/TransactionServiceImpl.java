@@ -30,15 +30,15 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public double sumTransactions(long transaction_id) {
-       TransactionEntity parentTransaction = repository.findTransactionById(transaction_id);
+    public double sumTransactions(Long transactionId) {
+       TransactionEntity parentTransaction = repository.findTransactionById(transactionId);
        if (parentTransaction == null) {
            return 0.00;
        }
-       List<TransactionEntity> childTransactionsByParentId = repository.findChildTransactionsByParentId(transaction_id);
+       List<TransactionEntity> childTransactionsByParentId = repository.findChildTransactionsByParentId(transactionId);
 
         List<Double> values = childTransactionsByParentId.stream()
-                .filter(transactionEntity -> transactionEntity.getParent_id() == transaction_id)
+                .filter(transactionEntity -> transactionEntity.getParentId() != null && transactionEntity.getParentId() == transactionId)
                 .map(TransactionEntity::getAmount)
                 .collect(Collectors.toList());
 
@@ -49,19 +49,19 @@ public class TransactionServiceImpl implements TransactionService {
 
     private TransactionEntity toTransactionEntity(Transaction transaction) {
         return TransactionEntity.builder()
-                .transactionId(transaction.getTransaction_id())
+                .transactionId(transaction.getTransactionId())
                 .amount(transaction.getAmount())
                 .type(transaction.getType())
-                .parent_id(transaction.getParent_id())
+                .parentId(transaction.getParentId())
                 .build();
     }
 
     private Transaction toTransaction(TransactionEntity transaction) {
         return Transaction.builder()
-                .transaction_id(transaction.getTransactionId())
+                .transactionId(transaction.getTransactionId())
                 .amount(transaction.getAmount())
                 .type(transaction.getType())
-                .parent_id(transaction.getParent_id())
+                .parentId(transaction.getParentId())
                 .build();
     }
 }
