@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "2608ce82-2572-42a7-a178-18ed61d187c7",
+		"name": "Mendel Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20838739",
+		"_collection_link": "https://planetary-resonance-243014.postman.co/workspace/Team-Workspace~b4ea8431-cfe0-4884-8a7f-f701d7d904a9/collection/20838739-2608ce82-2572-42a7-a178-18ed61d187c7?action=share&source=collection_link&creator=20838739"
+	},
+	"item": [
+		{
+			"name": "Put Transaction",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 1200.00,\n    \"type\": \"Credit\",\n    \"parentId\": 12\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/transactions/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"transactions",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get By Type",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/transactions/types/Credit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"transactions",
+						"types",
+						"Credit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sum Transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/transactions/sum/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"transactions",
+						"sum",
+						"11"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
