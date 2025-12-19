@@ -32,9 +32,7 @@ public class TransactionApi {
 
     @GetMapping("/sum/{transactionId}")
     public ResponseEntity<SumTransactionsResponseDto> sumTransactions(@PathVariable("transactionId") Long transactionId) {
-
         double sum = transactionService.sumTransactions(transactionId);
-
         return ResponseEntity.ok(
                 SumTransactionsResponseDto.builder()
                         .sum(sum)
