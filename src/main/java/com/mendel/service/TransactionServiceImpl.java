@@ -2,6 +2,7 @@ package com.mendel.service;
 
 import com.mendel.persistence.entity.TransactionEntity;
 import com.mendel.persistence.repository.TransactionRepository;
+import com.mendel.persistence.repository.exception.EntityNotFoundException;
 import com.mendel.service.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class TransactionServiceImpl implements TransactionService {
     public double sumTransactions(Long transactionId) {
        TransactionEntity parentTransaction = repository.findTransactionById(transactionId);
        if (parentTransaction == null) {
-           return 0.00;
+           throw new EntityNotFoundException();
        }
        List<TransactionEntity> childTransactionsByParentId = repository.findChildTransactionsByParentId(transactionId);
 

@@ -18,12 +18,9 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 
 	@Override
 	public TransactionEntity updateTransaction(TransactionEntity transaction) {
-
-		printDatabaseState("updateTransaction [before]");
-
 		DATABASE.put(transaction.getTransactionId(), transaction);
 
-		printDatabaseState("updateTransaction [after]");
+		printDatabaseState("updateTransaction");
 
 		return transaction;
 	}
@@ -63,7 +60,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 	 */
 	private void printDatabaseState(String operation) {
 		log.info("Executing DATABASE operation {}", operation);
-		log.info("Printing current database state...");
+		log.info("Printing resulting database state...");
 		DATABASE.forEach((k, v) -> log.info("Key: {}, Value: {}", k, v));
 	}
 }
